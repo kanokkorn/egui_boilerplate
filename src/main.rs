@@ -1,8 +1,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] 
 
 use eframe::egui;
-use egui::pos2;
-use egui::{RichText, FontId, Color32};
+
+
 
 #[derive(Default)]
 struct ExampleApp {
@@ -60,18 +60,15 @@ impl eframe::App for ExampleApp {
                     }
                 });
                 // Tools
-                ui.menu_button("Help", |ui| {
-                    if ui.button("Get Help").clicked() {
+                ui.menu_button("Tools", |ui| {
+                    if ui.button("Plugins").clicked() {
+                        unimplemented!()
                     }
-                    if ui.button("Report a bug").clicked() {
-                        //functionality
+                    if ui.button("Preferences").clicked() {
+                        unimplemented!()
                     }
-                    if ui.button("Troubleshooting").clicked() {
-                        //functionality
-                    }
-                    ui.separator();
-                    if ui.button("About this program").clicked() {
-                        //funtionality
+                    if ui.button("Settings").clicked() {
+                        unimplemented!()
                     }
                 });
                 // Help
@@ -117,7 +114,7 @@ impl eframe::App for ExampleApp {
                     ui.label("Main section of the program.");
                 });
                 egui::ScrollArea::vertical().show(ui, |ui| {
-                    egui::CentralPanel::default().show_inside(ui, |ui| {
+                    egui::CentralPanel::default().show_inside(ui, |_ui| {
 
                     });
                 });
