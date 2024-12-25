@@ -2,16 +2,15 @@
 
 use eframe::egui;
 
-
-
 #[derive(Default)]
 struct ExampleApp {
     // dropped_files: Vec<egui::DroppedFile>,
     picked_path: Option<String>,
     show_confirmation_dialog: bool,
     allowed_to_close: bool,
+    settings: bool,
+    about: bool,
 }
-
 impl ExampleApp {
     fn name() -> &'static str {
         "egui boilerplate"
@@ -68,7 +67,7 @@ impl eframe::App for ExampleApp {
                         unimplemented!()
                     }
                     if ui.button("Settings").clicked() {
-                        unimplemented!()
+                      self.settings =  true;
                     }
                 });
                 // Help
@@ -115,7 +114,6 @@ impl eframe::App for ExampleApp {
                 });
                 egui::ScrollArea::vertical().show(ui, |ui| {
                     egui::CentralPanel::default().show_inside(ui, |_ui| {
-
                     });
                 });
             });
@@ -129,7 +127,29 @@ impl eframe::App for ExampleApp {
                 self.show_confirmation_dialog = true;
             }
         }
-
+        if self.about {
+          egui::Window::new("About")
+              .resizable(false)
+              .collapsible(false)
+              .show(ctx, |ui| {
+                  ui.label("change theme");
+                  egui::widgets::global_dark_light_mode_buttons(ui);
+                  ui.separator();
+                  ui.label("another setting");
+                  egui::widgets::global_dark_light_mode_buttons(ui);
+              });
+        }
+        if self.settings {
+          egui::Window::new("Setting")
+              .resizable(false)
+              .show(ctx, |ui| {
+                  ui.label("change theme");
+                  egui::widgets::global_dark_light_mode_buttons(ui);
+                  ui.separator();
+                  ui.label("another setting");
+                  egui::widgets::global_dark_light_mode_buttons(ui);
+              });
+        }
         if self.show_confirmation_dialog {
             egui::Window::new("Do you want to quit?")
                 .pivot(egui::Align2::CENTER_TOP)
